@@ -6,15 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.captaingame.ui.theme.CaptainGameTheme
 import kotlin.random.Random
 
@@ -33,14 +33,15 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun captainGame() {
-        val treasuresFound = remember { mutableStateOf(0) }
-        val direction = remember { mutableStateOf("North") }
+        //values
+        var treasuresFound by remember { mutableStateOf(0) }
+        var direction by remember { mutableStateOf("North") }
         val stormChance = 0.2
         val stormMessage = remember { mutableStateOf("") }
 
         Column {
-            Text("Treasures Found: ${treasuresFound.value}")
-            Text("Current Direction: ${direction.value}")
+            Text("Treasures Found: $treasuresFound")
+            Text("Current Direction: $direction")
 
             //storm message if present
             if (stormMessage.value.isNotEmpty()) {
@@ -48,15 +49,15 @@ class MainActivity : ComponentActivity() {
             }
 
             Button(onClick = {
-                direction.value = "East"
+                direction = "East"
                 if (Random.nextFloat() < stormChance) {
                     //if storm, reset treasures and show message
-                    treasuresFound.value = 0
+                    treasuresFound = 0
                     stormMessage.value = "You lost your treasure in the sea after a storm!"
                 } else {
                     stormMessage.value = "Smooth sailing"
                     if (Random.nextBoolean()) {
-                        treasuresFound.value += 1
+                        treasuresFound += 1
                     }
                 }
             }) {
@@ -64,14 +65,14 @@ class MainActivity : ComponentActivity() {
             }
 
             Button(onClick = {
-                direction.value = "West"
+                direction = "West"
                 if (Random.nextFloat() < stormChance) {
-                    treasuresFound.value = 0
+                    treasuresFound = 0
                     stormMessage.value = "You lost your treasure in the sea after a storm!"
                 } else {
                     stormMessage.value = "Smooth sailing"
                     if (Random.nextBoolean()) {
-                        treasuresFound.value += 1
+                        treasuresFound += 1
                     }
                 }
             }) {
@@ -79,14 +80,14 @@ class MainActivity : ComponentActivity() {
             }
 
             Button(onClick = {
-                direction.value = "North"
+                direction = "North"
                 if (Random.nextFloat() < stormChance) {
-                    treasuresFound.value = 0
+                    treasuresFound = 0
                     stormMessage.value = "You lost your treasure in the sea after a storm!"
                 } else {
                     stormMessage.value = "Smooth sailing"
                     if (Random.nextBoolean()) {
-                        treasuresFound.value += 1
+                        treasuresFound += 1
                     }
                 }
             }) {
@@ -94,14 +95,14 @@ class MainActivity : ComponentActivity() {
             }
 
             Button(onClick = {
-                direction.value = "South"
+                direction = "South"
                 if (Random.nextFloat() < stormChance) {
-                    treasuresFound.value = 0
+                    treasuresFound = 0
                     stormMessage.value = "You lost your treasure in the sea after a storm!"
                 } else {
                     stormMessage.value = "Smooth sailing"
                     if (Random.nextBoolean()) {
-                        treasuresFound.value += 1
+                        treasuresFound += 1
                     }
                 }
             }) {
